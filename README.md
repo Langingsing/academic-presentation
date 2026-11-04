@@ -10,7 +10,7 @@
 - 使用实际音轨安排切页、对齐 SRT，并检查压缩后的图表和视频。
 - 比较本地 TTS 后端与 CPU/GPU 性能，区分短样音估算和整片实测。
 
-本仓库包含技能指令和一个本地 TTS 配置脚本，不附带幻灯片渲染器、语音模型或 TTS 引擎，也不提供一键生成完整视频的流水线。完整录播需要执行环境提供演示文稿工具、FFmpeg 和相应语音工具。
+本仓库包含技能指令和一个本地 TTS 配置脚本，不附带幻灯片渲染器、语音模型或 TTS 引擎，也不提供一键生成完整视频的流水线。完整录播所需的画面导出、声音制作、字幕和编码能力按各自电脑环境选择，技能不要求使用固定软件或模型。
 
 ## 安装
 
@@ -37,9 +37,15 @@ git clone https://github.com/Langingsing/academic-presentation.git "$HOME/.codex
 
 也可只请求风格分析、讲稿整理或录播检查；技能按任务读取需要的参考文档。
 
-## 本地 TTS 快速开始
+## 录播流程
 
-脚本需要 Python 3.10+，仅使用标准库；另需自行准备 [Qwen3-TTS C 实现](https://github.com/gabriele-mastrapasqua/qwen3-tts)、相应模型及已编码的 `.qvoice` 或 `.bin` 音色文件。下面命令在仓库根目录执行，Windows 可将 `python` 换为 `py -3`。
+确认交付要求 → 整理逐页讲稿 → 准备静态或动态画面 → 试做声音和代表性样片 → 分段生成与内容回查 → 字幕对齐 → 合成检查 → 剪辑与交付。已有合格材料直接复用，按任务进入相应阶段。
+
+[完整流程](references/recorded-talk.md)说明了画面导出、不同字幕呈现方式、片头裁剪及字幕同步处理。工具、模型和参数按当前环境选择。
+
+## 可选实现：本地 TTS 脚本
+
+选择这个实现时，脚本需要 Python 3.10+，仅使用标准库；另需自行准备 [Qwen3-TTS C 实现](https://github.com/gabriele-mastrapasqua/qwen3-tts)、相应模型及已编码的 `.qvoice` 或 `.bin` 音色文件。下面命令在仓库根目录执行，Windows 可将 `python` 换为 `py -3`。
 
 ```text
 python scripts/tts.py init
@@ -91,7 +97,7 @@ academic-presentation/
 ## 参考与验证
 
 - [技能入口](SKILL.md)：适用范围、风格与学术叙事。
-- [录播与配音](references/recorded-talk.md)：样片、韵律、内容回查、SRT 与压缩检查。
+- [录播与配音](references/recorded-talk.md)：从讲稿与画面准备到字幕、剪辑和交付的完整流程。
 - [TTS 配置](references/tts-configuration.md)：配置字段、路径与命令行为。
 - [TTS 性能](references/tts-performance.md)：后端选择、公平比较及耗时估算。
 
